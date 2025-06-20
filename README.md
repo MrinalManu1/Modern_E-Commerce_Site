@@ -1,6 +1,6 @@
 <h1 align="center">✨ PERN Stack Tutorial ✨</h1>
 
-![Demo App](/frontend/public/screenshot-for-readme.png)
+
 
 Highlights:
 
@@ -10,6 +10,8 @@ Highlights:
 - 🐞 Error handling both on the server and client
 - ⭐ Deployment for FREE!
 - ⏳ And much more!
+- 🔒 Authentication using hashing and salting
+- ⭐Admin and customer mode for funtionality
 
 ### Setup .env file
 

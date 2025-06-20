@@ -1,13 +1,19 @@
 import { Link, useResolvedPath } from "react-router-dom";
-import { ShoppingBagIcon, ShoppingCartIcon } from "lucide-react";
+import { ShoppingBagIcon, ShoppingCartIcon, UserIcon, LogOutIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import { useProductStore } from "../store/useProductStore";
+import { useAuthStore } from "../store/useAuthStore"; 
 
 function Navbar() {
   const { pathname } = useResolvedPath();
   const isHomePage = pathname === "/";
 
   const { products } = useProductStore();
+  const { user, isAuthenticated, logout } = useAuthStore(); 
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-content/10 sticky top-0 z-50">
@@ -31,6 +37,42 @@ function Navbar() {
           {/* RIGHT SECTION */}
           <div className="flex items-center gap-4">
             <ThemeSelector />
+
+            {/* USER SECTION - ADD THIS */}
+            {isAuthenticated ? (
+              <div className="flex items-center gap-3">
+                {/* User Info */}
+                <div className="hidden sm:flex items-center gap-2">
+                  <div className="avatar placeholder">
+                    <div className="bg-primary text-primary-content rounded-full w-8">
+                      <span className="text-xs font-bold">
+                        {user?.username?.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium">{user?.username}</span>
+                    <span className="text-xs text-base-content/60 capitalize">
+                      {user?.role}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  className="btn btn-ghost btn-sm"
+                  title="Logout"
+                >
+                  <LogOutIcon className="size-4" />
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" className="btn btn-primary btn-sm">
+                <UserIcon className="size-4 mr-1" />
+                Login
+              </Link>
+            )}
 
             {isHomePage && (
               <div className="indicator">

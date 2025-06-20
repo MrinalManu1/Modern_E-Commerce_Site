@@ -2,7 +2,9 @@ import { create } from "zustand";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-// base url will be dynamic depending on the environment
+
+axios.defaults.withCredentials = true;
+
 const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "";
 
 export const useProductStore = create((set, get) => ({
@@ -35,7 +37,14 @@ export const useProductStore = create((set, get) => ({
       document.getElementById("add_product_modal").close();
     } catch (error) {
       console.log("Error in addProduct function", error);
-      toast.error("Something went wrong");
+      // HANDLE AUTH ERRORS - ADD THIS
+      if (error.response?.status === 401) {
+        toast.error("Please login to add products");
+      } else if (error.response?.status === 403) {
+        toast.error("Admin access required");
+      } else {
+        toast.error("Something went wrong");
+      }
     } finally {
       set({ loading: false });
     }
@@ -63,7 +72,14 @@ export const useProductStore = create((set, get) => ({
       toast.success("Product deleted successfully");
     } catch (error) {
       console.log("Error in deleteProduct function", error);
-      toast.error("Something went wrong");
+      // HANDLE AUTH ERRORS - ADD THIS
+      if (error.response?.status === 401) {
+        toast.error("Please login to delete products");
+      } else if (error.response?.status === 403) {
+        toast.error("Admin access required");
+      } else {
+        toast.error("Something went wrong");
+      }
     } finally {
       set({ loading: false });
     }
@@ -75,7 +91,7 @@ export const useProductStore = create((set, get) => ({
       const response = await axios.get(`${BASE_URL}/api/products/${id}`);
       set({
         currentProduct: response.data.data,
-        formData: response.data.data, // pre-fill form with current product data
+        formData: response.data.data,
         error: null,
       });
     } catch (error) {
@@ -85,6 +101,7 @@ export const useProductStore = create((set, get) => ({
       set({ loading: false });
     }
   },
+
   updateProduct: async (id) => {
     set({ loading: true });
     try {
@@ -93,7 +110,14 @@ export const useProductStore = create((set, get) => ({
       set({ currentProduct: response.data.data });
       toast.success("Product updated successfully");
     } catch (error) {
-      toast.error("Something went wrong");
+      // HANDLE AUTH ERRORS - ADD THIS
+      if (error.response?.status === 401) {
+        toast.error("Please login to update products");
+      } else if (error.response?.status === 403) {
+        toast.error("Admin access required");
+      } else {
+        toast.error("Something went wrong");
+      }
       console.log("Error in updateProduct function", error);
     } finally {
       set({ loading: false });

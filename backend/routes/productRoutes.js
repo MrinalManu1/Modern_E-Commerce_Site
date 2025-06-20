@@ -1,4 +1,4 @@
-import expres from "express";
+import express from "express";
 import {
   createProduct,
   deleteProduct,
@@ -6,13 +6,15 @@ import {
   getProducts,
   updateProduct,
 } from "../controllers/productController.js";
+import { verifyJWT } from "../middleware/auth.js"; 
+import { requireAdmin } from "../middleware/admin.js";
 
-const router = expres.Router();
+const router = express.Router();
 
 router.get("/", getProducts);
 router.get("/:id", getProduct);
-router.post("/", createProduct);
-router.put("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
+router.post("/", verifyJWT, requireAdmin, createProduct); 
+router.put("/:id", verifyJWT, requireAdmin, updateProduct); 
+router.delete("/:id", verifyJWT, requireAdmin, deleteProduct);
 
 export default router;
