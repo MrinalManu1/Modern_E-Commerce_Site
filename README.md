@@ -30,32 +30,8 @@ Features user authentication, product management, and a sleek, professional UI.
 
 ## 📂 Project Structure
 
-.
-├── backend/ # Express.js backend
-│ ├── config/ # Database and environment config
-│ ├── controllers/ # Route controllers
-│ ├── lib/ # (Optional) Utility libraries
-│ ├── middleware/ # Express middleware (auth, error handling, etc.)
-│ ├── routes/ # API route definitions
-│ ├── seeds/ # Database seed scripts
-│ └── server.js # Backend entry point
-├── frontend/ # React frontend (Vite)
-│ ├── dist/ # Production build output
-│ ├── node_modules/ # Frontend dependencies
-│ ├── public/ # Static assets
-│ ├── src/ # React source code
-│ ├── eslint.config.js # Linting config
-│ ├── index.html # Main HTML file
-│ ├── package.json # Frontend dependencies/scripts
-│ ├── postcss.config.js # PostCSS config
-│ ├── tailwind.config.js # Tailwind CSS config
-│ └── vite.config.js # Vite config
-├── node_modules/ # Root dependencies (if any)
-├── .env # Environment variables (root)
-├── .gitignore # Git ignore rules
-├── package.json # Root dependencies/scripts
-├── package-lock.json # Root lock file
-└── README.md # Project documentation
+![image](https://github.com/user-attachments/assets/b97df068-2446-435a-90db-7e1a90be1a02)
+
 
 text
 
