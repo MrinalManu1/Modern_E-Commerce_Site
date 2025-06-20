@@ -2,6 +2,7 @@
 
 A modern, responsive e-commerce platform built with the PERN stack (PostgreSQL, Express.js, React, Node.js).  
 Features user authentication, product management, and a sleek, professional UI.
+Deployed link:  https://modern-e-commerce-site.onrender.com 
 
 ---
 
